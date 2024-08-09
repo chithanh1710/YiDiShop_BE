@@ -4,6 +4,7 @@ import { IProduct } from "./Product.model";
 
 // Định nghĩa TypeScript Interface cho Order
 export interface IOrder extends Document {
+  _id: Schema.Types.ObjectId;
   user: IUser["_id"];
   products: {
     product: IProduct["_id"];
@@ -19,6 +20,10 @@ export interface IOrder extends Document {
 
 // Định nghĩa Schema cho Order
 const orderSchema: Schema<IOrder> = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -53,7 +58,7 @@ const orderSchema: Schema<IOrder> = new Schema({
   },
   createAt: {
     type: Date,
-    default: Date.now,
+    default: () => new Date(),
   },
   paymentMethod: {
     type: String,

@@ -1,8 +1,9 @@
 import mongoose, { Document, Query, Schema } from "mongoose";
-import { ICategory } from "./Category.model";
+import Category, { ICategory } from "./Category.model";
 
 // Định nghĩa TypeScript Interface cho Product
 export interface IProduct extends Document {
+  _id: Schema.Types.ObjectId;
   name: string;
   price: number;
   priceDiscount?: number;
@@ -17,6 +18,10 @@ export interface IProduct extends Document {
 
 // Định nghĩa Schema cho Product
 const productSchema: Schema<IProduct> = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   name: {
     type: String,
     required: [true, "A product must have a name"],
@@ -66,8 +71,24 @@ const productSchema: Schema<IProduct> = new Schema({
   },
   createAt: {
     type: Date,
-    default: Date.now,
+    required: [true, "A product must have a stock quantity"],
+    default: () => new Date(),
   },
+});
+
+productSchema.pre("save", async function (next) {
+  const categoryId = (await Category.find()).map((value) =>
+    value._id.toString()
+  );
+  if (!categoryId.includes(this.category.toString()))
+    throw new Error("Invalid category send");
+
+  await Category.findByIdAndUpdate(this.category, {
+    $inc: { numProduct: 1 },
+    $addToSet: { products: this._id },
+  });
+
+  next();
 });
 
 productSchema.pre<Query<ICategory, ICategory>>(/^find/, function (next) {

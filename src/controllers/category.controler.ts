@@ -7,7 +7,9 @@ import Category from "../models/Category.model";
 
 export async function getAllCategory(req: Request, res: Response) {
   try {
-    const query = (await new APIFeatures(Category.find(), req.query).Validate())
+    const query = (
+      await new APIFeatures(Category.find(), req.query, Category).Validate()
+    )
       .Filter()
       .Sort()
       .SkipAndLimit()
@@ -114,6 +116,7 @@ export async function updateCategory(req: Request, res: Response) {
       new: true,
       runValidators: true,
     });
+
     if (!updateCategory) throw new Error("Data not found");
 
     res.status(201).json({

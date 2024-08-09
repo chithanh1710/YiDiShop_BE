@@ -4,6 +4,7 @@ import Product from "../models/Product.model";
 class APIFeatures {
   private query: any;
   private queryString: any;
+  private model: any;
   private page: number;
   private limit: number;
   private sort: any | undefined;
@@ -12,9 +13,10 @@ class APIFeatures {
   private totalItem: number | undefined;
   private totalPage: number | undefined;
 
-  constructor(query: any, queryString: any) {
+  constructor(query: any, queryString: any, model: any) {
     this.query = query;
     this.queryString = queryString;
+    this.model = model;
 
     this.page = queryString.page || __PAGE_DEFAULT;
     this.limit = queryString.limit || __PAGE_LIMIT;
@@ -37,9 +39,11 @@ class APIFeatures {
     if (this.limit <= 0 || this.limit >= 50)
       throw new Error("Invalid limit number!!! (0 - 50)");
 
-    this.totalItem = await Product.countDocuments();
-    this.totalPage = Math.ceil(this.totalItem / this.limit);
+    this.totalItem = await this.model.countDocuments();
+    if (!this.totalItem || this.totalItem <= 0)
+      throw new Error("Not found data");
 
+    this.totalPage = Math.ceil(this.totalItem / this.limit);
     if (this.page > this.totalPage)
       throw new Error(
         `Current page number is greater than total page number!!! (page < ${this.totalPage})`
@@ -75,17 +79,21 @@ class APIFeatures {
       typeof this.sort === "object" &&
       Object.keys(this.sort).length > 0
     ) {
-      const validSortDirections = ["asc", "desc"];
+      const validSortDirections = ["asc", "desc", "-1", "1"];
       const sortTmp = Object.keys(this.sort).reduce((acc: any, key) => {
-        console.log("this.sort[key]: ", this.sort[key]);
+        console.log(`this.sort[${key}]: `, this.sort[key]);
         if (validSortDirections.includes(this.sort[key])) {
-          acc[key] = this.sort[key];
+          if (this.sort[key] === "-1" || this.sort[key] === "1") {
+            acc[key] = Number(this.sort[key]);
+          } else {
+            acc[key] = this.sort[key];
+          }
         }
         return acc;
       }, {});
       this.query = this.query.sort(sortTmp);
     } else {
-      this.query = this.query.sort({ createAt: "desc" });
+      this.query = this.query.sort("-createAt");
     }
 
     return this;

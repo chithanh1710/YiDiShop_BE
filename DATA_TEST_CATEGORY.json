@@ -1,52 +1,42 @@
 [
   {
     "name": "Electronics",
-    "description": "Gadgets and devices",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "Gadgets and devices"
   },
   {
     "name": "Books",
-    "description": "All kinds of books",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "All kinds of books"
   },
   {
     "name": "Fashion",
-    "description": "Clothing and accessories",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "Clothing and accessories"
   },
   {
     "name": "Home & Kitchen",
-    "description": "Furniture and appliances",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "Furniture and appliances"
   },
   {
     "name": "Sports",
-    "description": "Sports equipment and gear",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "Sports equipment and gear"
   },
   {
     "name": "Toys",
-    "description": "Toys for children of all ages",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "Toys for children of all ages"
   },
   {
     "name": "Beauty",
-    "description": "Cosmetics and skincare",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "Cosmetics and skincare"
   },
   {
     "name": "Health",
-    "description": "Health and wellness products",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "Health and wellness products"
   },
   {
     "name": "Automotive",
-    "description": "Car parts and accessories",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "Car parts and accessories"
   },
   {
     "name": "Gaming",
-    "description": "Video games and consoles",
-    "createAt": "2024-08-09T00:00:00Z"
+    "description": "Video games and consoles"
   }
 ]

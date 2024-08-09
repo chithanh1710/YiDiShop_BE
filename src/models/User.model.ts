@@ -3,6 +3,7 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 
 export interface IUser extends Document {
+  _id: Schema.Types.ObjectId;
   name: string;
   email: string;
   password: string;
@@ -17,6 +18,10 @@ export interface IUser extends Document {
 }
 
 const userSchema: Schema<IUser> = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   name: {
     type: String,
     required: [true, "Please provide your name"],
