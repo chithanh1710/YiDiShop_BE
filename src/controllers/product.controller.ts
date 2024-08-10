@@ -116,35 +116,6 @@ export async function getProduct(req: Request, res: Response) {
   }
 }
 
-export async function importProduct(req: Request, res: Response) {
-  try {
-    const filePath = path.join(__dirname, "../../DATA_TEST_PRODUCT.json");
-    const dataList = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    await Product.deleteMany();
-    await Category.updateMany({ products: [], numProduct: 0 });
-    await Product.create(dataList);
-
-    res.status(200).json({
-      status: "success",
-      requestedAt: new Date(),
-      results: dataList.length,
-      data: {
-        product: dataList,
-      },
-    });
-  } catch (error: any) {
-    const { message, ...err } = error;
-    res.status(400).json({
-      status: "fail",
-      message: "Invalid data send",
-      error: {
-        message,
-        err,
-      },
-    });
-  }
-}
-
 export async function createProduct(req: Request, res: Response) {
   try {
     let imageCoverUrl: string | undefined;

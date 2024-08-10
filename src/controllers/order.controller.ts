@@ -50,34 +50,6 @@ export async function getOrder(req: Request, res: Response) {
   }
 }
 
-export async function importOrder(req: Request, res: Response) {
-  try {
-    const filePath = path.join(__dirname, "../../DATA_TEST_ORDER.json");
-    const dataList = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    await Order.deleteMany();
-    await Order.create(dataList);
-
-    res.status(200).json({
-      status: "success",
-      requestedAt: Date.now(),
-      results: dataList.length,
-      data: {
-        order: dataList,
-      },
-    });
-  } catch (error: any) {
-    const { message, ...err } = error;
-    res.status(400).json({
-      status: "fail",
-      message: "Invalid data send",
-      error: {
-        message,
-        err,
-      },
-    });
-  }
-}
-
 export async function createOrder(req: Request, res: Response) {
   try {
     const newOrder = await Order.create(req.body);

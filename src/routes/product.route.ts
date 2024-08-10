@@ -6,7 +6,6 @@ import {
   deleteProduct,
   getAllProduct,
   getProduct,
-  importProduct,
   updateProduct,
 } from "../controllers/product.controller";
 import multer from "multer";
@@ -25,8 +24,6 @@ const upload = multer({
 });
 
 const router = Router();
-
-router.route("/import-all").get(importProduct);
 
 router
   .route("/")

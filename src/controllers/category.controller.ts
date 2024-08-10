@@ -58,34 +58,6 @@ export async function getCategory(req: Request, res: Response) {
   }
 }
 
-export async function importCategory(req: Request, res: Response) {
-  try {
-    const filePath = path.join(__dirname, "../../DATA_TEST_CATEGORY.json");
-    const dataList = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    await Category.deleteMany();
-    await Category.create(dataList);
-
-    res.status(200).json({
-      status: "success",
-      requestedAt: Date.now(),
-      results: dataList.length,
-      data: {
-        category: dataList,
-      },
-    });
-  } catch (error: any) {
-    const { message, ...err } = error;
-    res.status(400).json({
-      status: "fail",
-      message: "Invalid data send",
-      error: {
-        message,
-        err,
-      },
-    });
-  }
-}
-
 export async function createCategory(req: Request, res: Response) {
   try {
     const newCategory = await Category.create(req.body);

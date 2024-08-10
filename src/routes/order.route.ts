@@ -4,13 +4,10 @@ import {
   deleteOrder,
   getAllOrder,
   getOrder,
-  importOrder,
   updateOrder,
 } from "../controllers/order.controller";
 
 const router = Router();
-
-router.route("/import-all").get(importOrder);
 
 router.route("/").get(getAllOrder).post(createOrder);
 

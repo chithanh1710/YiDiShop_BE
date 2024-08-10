@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 export interface IUser extends Document {
   _id: Schema.Types.ObjectId;
   name: string;
+  username: string;
   email: string;
   password: string;
   passwordConfirm: string | undefined;
@@ -25,6 +26,10 @@ const userSchema: Schema<IUser> = new Schema({
   name: {
     type: String,
     required: [true, "Please provide your name"],
+  },
+  username: {
+    type: String,
+    required: [true, "Please provide your username"],
   },
   email: {
     type: String,

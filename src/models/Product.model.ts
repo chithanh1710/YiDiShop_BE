@@ -14,6 +14,7 @@ export interface IProduct extends Document {
   category: ICategory["_id"];
   stockQuantity: number;
   createAt: Date;
+  averageRating: number;
 }
 
 // Định nghĩa Schema cho Product
@@ -49,6 +50,12 @@ const productSchema: Schema<IProduct> = new Schema({
     type: String,
     trim: true,
     required: [true, "A product must have a summary"],
+  },
+  averageRating: {
+    type: Number,
+    min: [1, "Rating cannot be less than 1"],
+    max: [5, "Rating cannot be more than 5"],
+    default: 0,
   },
   description: {
     type: String,

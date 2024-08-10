@@ -5,13 +5,10 @@ import {
   deleteUser,
   getAllUser,
   getUser,
-  importUser,
   updateUser,
 } from "../controllers/user.controller";
 
 const router = Router();
-
-router.route("/import-all").get(importUser);
 
 router.route("/").get(getAllUser).post(createUser);
 

@@ -1,8 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import fs from "fs";
-import path from "path";
 import { __PAGE_DEFAULT, __PAGE_LIMIT } from "../constants/PAGE";
-import APIFeatures from "../utils/APIFeatures";
 import User from "../models/User.model";
 
 export async function checkUser(
@@ -42,14 +39,7 @@ export async function checkUser(
 
 export async function getAllUser(req: Request, res: Response) {
   try {
-    const query = (
-      await new APIFeatures(User.find(), req.query, User).Validate()
-    )
-      .Filter()
-      .Sort()
-      .SkipAndLimit()
-      .Fields();
-    const allUser = await query.getQuery;
+    const allUser = await User.find().select("-__v");
     res.status(200).json({
       status: "success",
       results: allUser.length,
@@ -78,34 +68,6 @@ export async function getUser(req: Request, res: Response) {
       status: "success",
       data: {
         user,
-      },
-    });
-  } catch (error: any) {
-    const { message, ...err } = error;
-    res.status(400).json({
-      status: "fail",
-      message: "Invalid data send",
-      error: {
-        message,
-        err,
-      },
-    });
-  }
-}
-
-export async function importUser(req: Request, res: Response) {
-  try {
-    const filePath = path.join(__dirname, "../../DATA_TEST_USER.json");
-    const dataList = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    await User.deleteMany();
-    await User.create(dataList);
-
-    res.status(200).json({
-      status: "success",
-      requestedAt: Date.now(),
-      results: dataList.length,
-      data: {
-        user: dataList,
       },
     });
   } catch (error: any) {
