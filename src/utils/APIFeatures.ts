@@ -68,7 +68,7 @@ class APIFeatures {
           return match;
         })
     );
-    console.log("filter: ", queryStr);
+    // console.log("filter: ", queryStr);
     this.query = this.query.find(queryStr);
     return this;
   }
@@ -81,7 +81,7 @@ class APIFeatures {
     ) {
       const validSortDirections = ["asc", "desc", "-1", "1"];
       const sortTmp = Object.keys(this.sort).reduce((acc: any, key) => {
-        console.log(`this.sort[${key}]: `, this.sort[key]);
+        // console.log(`this.sort[${key}]: `, this.sort[key]);
         if (validSortDirections.includes(this.sort[key])) {
           if (this.sort[key] === "-1" || this.sort[key] === "1") {
             acc[key] = Number(this.sort[key]);
@@ -107,7 +107,7 @@ class APIFeatures {
 
   Fields() {
     // console.log(this.queryString);
-    console.log(`fields: ${this.fields}`);
+    // console.log(`fields: ${this.fields}`);
     if (this.fields) {
       const fieldArray = this.fields.split(",").join(" ");
       this.query = this.query.select(fieldArray);

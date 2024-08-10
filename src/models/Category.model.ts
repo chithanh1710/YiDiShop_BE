@@ -4,7 +4,17 @@ import { IProduct } from "./Product.model";
 // Định nghĩa TypeScript Interface cho Category
 export interface ICategory extends Document {
   _id: Schema.Types.ObjectId;
-  name: string;
+  name:
+    | "Electronics"
+    | "Books"
+    | "Fashion"
+    | "Home & Kitchen"
+    | "Sports"
+    | "Toys"
+    | "Beauty"
+    | "Health"
+    | "Automotive"
+    | "Gaming";
   numProduct: number;
   products: IProduct["_id"][];
   description?: string;
@@ -19,6 +29,18 @@ const categorySchema: Schema<ICategory> = new Schema({
   },
   name: {
     type: String,
+    enum: [
+      "Electronics",
+      "Books",
+      "Fashion",
+      "Home & Kitchen",
+      "Sports",
+      "Toys",
+      "Beauty",
+      "Gaming",
+      "Automotive",
+      "Health",
+    ],
     required: [true, "A category must have a name"],
     unique: true,
     trim: true,
