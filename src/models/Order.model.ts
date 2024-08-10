@@ -41,10 +41,6 @@ const orderSchema: Schema<IOrder> = new Schema({
         required: [true, "Order must have a product quantity"],
         min: [1, "Quantity cannot be less than 1"],
       },
-      price: {
-        type: Number,
-        required: [true, "Product must have a price"],
-      },
     },
   ],
   totalPrice: {
@@ -75,7 +71,7 @@ const orderSchema: Schema<IOrder> = new Schema({
 orderSchema.pre<Query<IOrder, IOrder>>(/^find/, function (next) {
   this.populate("user").populate({
     path: "products.product",
-    select: "name price",
+    select: "name price priceDiscount",
   });
   next();
 });

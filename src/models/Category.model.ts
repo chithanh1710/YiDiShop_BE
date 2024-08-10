@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
 import { IProduct } from "./Product.model";
-import { Query } from "mongoose";
 
 // Định nghĩa TypeScript Interface cho Category
 export interface ICategory extends Document {

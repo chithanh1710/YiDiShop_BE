@@ -61,14 +61,13 @@ const userSchema: Schema<IUser> = new Schema({
   },
   createAt: {
     type: Date,
-    default: Date.now,
+    default: () => new Date(),
   },
 });
 
 // Middleware để mã hóa mật khẩu trước khi lưu vào database
 userSchema.pre<IUser>("save", async function (next) {
   if (!this.isModified("password")) return next();
-
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
   next();

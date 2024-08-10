@@ -6,7 +6,7 @@ import {
   getCategory,
   importCategory,
   updateCategory,
-} from "../controllers/category.controler";
+} from "../controllers/category.controller";
 
 const router = Router();
 

@@ -68,7 +68,7 @@ class APIFeatures {
           return match;
         })
     );
-    // console.log("filter: ", queryStr);
+    console.log("filter: ", queryStr);
     this.query = this.query.find(queryStr);
     return this;
   }
@@ -106,7 +106,8 @@ class APIFeatures {
   }
 
   Fields() {
-    // console.log(`fields: ${this.fields}`);
+    // console.log(this.queryString);
+    console.log(`fields: ${this.fields}`);
     if (this.fields) {
       const fieldArray = this.fields.split(",").join(" ");
       this.query = this.query.select(fieldArray);
