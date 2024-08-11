@@ -21,7 +21,7 @@ import userRouter from "./routes/user.route";
 import orderRouter from "./routes/order.route";
 import reviewRouter from "./routes/review.route";
 const app = express();
-const allowedOrigins = ["https://your-allowed-domain.com"];
+const allowedOrigins = [process.env.__CORS_URL];
 
 app.use(
   cors({
