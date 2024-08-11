@@ -2,7 +2,6 @@ import mongoose, { Document, Query, Schema } from "mongoose";
 import { IUser } from "./User.model";
 import { IProduct } from "./Product.model";
 
-// Định nghĩa TypeScript Interface cho Order
 export interface IOrder extends Document {
   _id: Schema.Types.ObjectId;
   user: IUser["_id"];

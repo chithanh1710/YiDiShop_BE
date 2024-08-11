@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import fs from "fs";
-import path from "path";
 import Product from "../models/Product.model";
 import { __PAGE_DEFAULT, __PAGE_LIMIT } from "../constants/PAGE";
 import APIFeatures from "../utils/APIFeatures";
-import Category from "../models/Category.model";
+import Brand from "../models/Brand.model";
 import cloudinary from "../lib/cloudinary";
 
 export function checkImageLengthCreate(
@@ -226,14 +225,14 @@ export async function updateProduct(req: Request, res: Response) {
     if (!updateProduct) throw new Error("Data not found");
 
     // Xoá sản phẩm ở thể loại cũ
-    await Category.updateOne(
-      { _id: oldProduct.category }, // bảng cũ
+    await Brand.updateOne(
+      { _id: oldProduct.brand }, // bảng cũ
       { $inc: { numProduct: -1 }, $pull: { products: oldProduct._id } }
     );
 
     // Thêm sản phẩm ở thể loại mới
-    await Category.updateOne(
-      { _id: updateProduct.category }, // bảng mới
+    await Brand.updateOne(
+      { _id: updateProduct.brand }, // bảng mới
       { $inc: { numProduct: 1 }, $addToSet: { products: updateProduct._id } }
     );
 
@@ -277,8 +276,8 @@ export async function deleteProduct(req: Request, res: Response) {
 
     if (!product) throw new Error("Data not found");
 
-    await Category.updateOne(
-      { _id: product.category },
+    await Brand.updateOne(
+      { _id: product.brand },
       { $inc: { numProduct: -1 }, $pull: { products: product._id } }
     );
 

@@ -8,7 +8,7 @@ config({
 });
 
 import {
-  URL_CATEGORY,
+  URL_BRAND,
   URL_ORDER,
   URL_PRODUCT,
   URL_REVIEW,
@@ -16,7 +16,7 @@ import {
 } from "./constants/URL";
 
 import productRouter from "./routes/product.route";
-import categoryRouter from "./routes/category.route";
+import brandRouter from "./routes/brand.route";
 import userRouter from "./routes/user.route";
 import orderRouter from "./routes/order.route";
 import reviewRouter from "./routes/review.route";
@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(URL_PRODUCT, productRouter);
-app.use(URL_CATEGORY, categoryRouter);
+app.use(URL_BRAND, brandRouter);
 app.use(URL_USER, userRouter);
 app.use(URL_ORDER, orderRouter);
 app.use(URL_REVIEW, reviewRouter);

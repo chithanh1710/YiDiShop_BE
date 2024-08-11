@@ -1,5 +1,5 @@
 import mongoose, { Document, Query, Schema } from "mongoose";
-import Category, { ICategory } from "./Category.model";
+import Brand, { IBrand } from "./Brand.model";
 
 // Định nghĩa TypeScript Interface cho Product
 export interface IProduct extends Document {
@@ -11,7 +11,7 @@ export interface IProduct extends Document {
   description?: string;
   imageCover: string;
   images?: string[];
-  category: ICategory["_id"];
+  brand: IBrand["_id"];
   stockQuantity: number;
   createAt: Date;
   averageRating: number;
@@ -66,10 +66,10 @@ const productSchema: Schema<IProduct> = new Schema({
     required: [true, "A product must have a cover image"],
   },
   images: [String],
-  category: {
+  brand: {
     type: Schema.Types.ObjectId,
-    ref: "Category",
-    required: [true, "A product must belong to a category"],
+    ref: "Brand",
+    required: [true, "A product must belong to a brand"],
   },
   stockQuantity: {
     type: Number,
@@ -84,13 +84,11 @@ const productSchema: Schema<IProduct> = new Schema({
 });
 
 productSchema.pre("save", async function (next) {
-  const categoryId = (await Category.find()).map((value) =>
-    value._id.toString()
-  );
-  if (!categoryId.includes(this.category.toString()))
-    throw new Error("Invalid category send");
+  const brandId = (await Brand.find()).map((value) => value._id.toString());
+  if (!brandId.includes(this.brand.toString()))
+    throw new Error("Invalid brand send");
 
-  await Category.findByIdAndUpdate(this.category, {
+  await Brand.findByIdAndUpdate(this.brand, {
     $inc: { numProduct: 1 },
     $addToSet: { products: this._id },
   });
@@ -98,9 +96,9 @@ productSchema.pre("save", async function (next) {
   next();
 });
 
-productSchema.pre<Query<ICategory, ICategory>>(/^find/, function (next) {
+productSchema.pre<Query<IBrand, IBrand>>(/^find/, function (next) {
   this.populate({
-    path: "category",
+    path: "brand",
     select: "name description",
   });
   next();
