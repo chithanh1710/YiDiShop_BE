@@ -1,9 +1,41 @@
 import express from "express";
 import morgan from "morgan";
+import cors from "cors";
+import { config } from "dotenv";
+
+config({
+  path: "./config.env",
+});
+
+import {
+  URL_CATEGORY,
+  URL_ORDER,
+  URL_PRODUCT,
+  URL_REVIEW,
+  URL_USER,
+} from "./constants/URL";
+
 import productRouter from "./routes/product.route";
-import { URL_CATEGORY, URL_PRODUCT } from "./constants/URL";
 import categoryRouter from "./routes/category.route";
+import userRouter from "./routes/user.route";
+import orderRouter from "./routes/order.route";
+import reviewRouter from "./routes/review.route";
 const app = express();
+const allowedOrigins = [process.env.__CORS_URL];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -15,5 +47,8 @@ app.get("/", (req, res) => {
 
 app.use(URL_PRODUCT, productRouter);
 app.use(URL_CATEGORY, categoryRouter);
+app.use(URL_USER, userRouter);
+app.use(URL_ORDER, orderRouter);
+app.use(URL_REVIEW, reviewRouter);
 
 export default app;

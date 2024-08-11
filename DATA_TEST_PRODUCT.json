@@ -10,9 +10,8 @@
       "https://example.com/images/smartphone-xyz-1.jpg",
       "https://example.com/images/smartphone-xyz-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af3",
-    "stockQuantity": 50,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 50
   },
   {
     "name": "Laptop Pro 15",
@@ -25,9 +24,8 @@
       "https://example.com/images/laptop-pro-15-1.jpg",
       "https://example.com/images/laptop-pro-15-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af3",
-    "stockQuantity": 30,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 30
   },
   {
     "name": "Bluetooth Headphones",
@@ -40,9 +38,8 @@
       "https://example.com/images/bluetooth-headphones-1.jpg",
       "https://example.com/images/bluetooth-headphones-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af2",
-    "stockQuantity": 75,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 75
   },
   {
     "name": "4K Ultra HD TV",
@@ -55,9 +52,8 @@
       "https://example.com/images/4k-ultra-hd-tv-1.jpg",
       "https://example.com/images/4k-ultra-hd-tv-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af3",
-    "stockQuantity": 20,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 20
   },
   {
     "name": "Digital Camera",
@@ -70,9 +66,8 @@
       "https://example.com/images/digital-camera-1.jpg",
       "https://example.com/images/digital-camera-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af6",
-    "stockQuantity": 40,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 40
   },
   {
     "name": "Smart Watch",
@@ -85,9 +80,8 @@
       "https://example.com/images/smart-watch-1.jpg",
       "https://example.com/images/smart-watch-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af9",
-    "stockQuantity": 60,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 60
   },
   {
     "name": "Gaming Console",
@@ -100,9 +94,8 @@
       "https://example.com/images/gaming-console-1.jpg",
       "https://example.com/images/gaming-console-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af2",
-    "stockQuantity": 25,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 25
   },
   {
     "name": "Air Purifier",
@@ -115,9 +108,8 @@
       "https://example.com/images/air-purifier-1.jpg",
       "https://example.com/images/air-purifier-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af9",
-    "stockQuantity": 35,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 35
   },
   {
     "name": "Electric Kettle",
@@ -130,9 +122,8 @@
       "https://example.com/images/electric-kettle-1.jpg",
       "https://example.com/images/electric-kettle-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af9",
-    "stockQuantity": 80,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 80
   },
   {
     "name": "Yoga Mat",
@@ -145,9 +136,8 @@
       "https://example.com/images/yoga-mat-1.jpg",
       "https://example.com/images/yoga-mat-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af6",
-    "stockQuantity": 70,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 70
   },
   {
     "name": "Coffee Maker",
@@ -160,9 +150,8 @@
       "https://example.com/images/coffee-maker-1.jpg",
       "https://example.com/images/coffee-maker-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af9",
-    "stockQuantity": 45,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 45
   },
   {
     "name": "Fitness Tracker",
@@ -175,9 +164,8 @@
       "https://example.com/images/fitness-tracker-1.jpg",
       "https://example.com/images/fitness-tracker-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af6",
-    "stockQuantity": 55,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 55
   },
   {
     "name": "Electric Toothbrush",
@@ -190,8 +178,7 @@
       "https://example.com/images/electric-toothbrush-1.jpg",
       "https://example.com/images/electric-toothbrush-2.jpg"
     ],
-    "category": "66b6050a7471904b27380af9",
-    "stockQuantity": 90,
-    "createAt": "2024-08-09T12:00:00.000Z"
+    "category": "66b6259529fcbd095b7593d4",
+    "stockQuantity": 90
   }
 ]

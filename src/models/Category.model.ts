@@ -1,17 +1,46 @@
-import mongoose, { Document, Query, Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 import { IProduct } from "./Product.model";
 
 // Định nghĩa TypeScript Interface cho Category
 export interface ICategory extends Document {
-  name: string;
+  _id: Schema.Types.ObjectId;
+  name:
+    | "Electronics"
+    | "Books"
+    | "Fashion"
+    | "Home & Kitchen"
+    | "Sports"
+    | "Toys"
+    | "Beauty"
+    | "Health"
+    | "Automotive"
+    | "Gaming";
+  numProduct: number;
+  products: IProduct["_id"][];
   description?: string;
   createAt: Date;
 }
 
 // Định nghĩa Schema cho Category
 const categorySchema: Schema<ICategory> = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   name: {
     type: String,
+    enum: [
+      "Electronics",
+      "Books",
+      "Fashion",
+      "Home & Kitchen",
+      "Sports",
+      "Toys",
+      "Beauty",
+      "Gaming",
+      "Automotive",
+      "Health",
+    ],
     required: [true, "A category must have a name"],
     unique: true,
     trim: true,
@@ -24,18 +53,18 @@ const categorySchema: Schema<ICategory> = new Schema({
     type: String,
     trim: true,
   },
+  numProduct: {
+    type: Number,
+    default: 0,
+  },
+  products: {
+    type: [Schema.Types.ObjectId],
+    ref: "Product",
+  },
   createAt: {
     type: Date,
-    default: Date.now,
+    default: () => new Date(),
   },
-});
-
-categorySchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
-  // this.populate({
-  //   path: "category",
-  //   select: "name description",
-  // });
-  next();
 });
 
 const Category = mongoose.model<ICategory>("Category", categorySchema);

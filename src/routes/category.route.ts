@@ -4,13 +4,10 @@ import {
   deleteCategory,
   getAllCategory,
   getCategory,
-  importCategory,
   updateCategory,
-} from "../controllers/category.controler";
+} from "../controllers/category.controller";
 
 const router = Router();
-
-router.route("/import-all").get(importCategory);
 
 router.route("/").get(getAllCategory).post(createCategory);
 

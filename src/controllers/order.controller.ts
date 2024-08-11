@@ -1,23 +1,17 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import path from "path";
-import Product from "../models/Product.model";
 import { __PAGE_DEFAULT, __PAGE_LIMIT } from "../constants/PAGE";
-import APIFeatures from "../utils/APIFeatures";
+import Order from "../models/Order.model";
 
-export async function getAllProduct(req: Request, res: Response) {
+export async function getAllOrder(req: Request, res: Response) {
   try {
-    const query = (await new APIFeatures(Product.find(), req.query).Validate())
-      .Filter()
-      .Sort()
-      .SkipAndLimit()
-      .Fields();
-    const allProduct = await query.getQuery;
+    const allOrder = await Order.find();
     res.status(200).json({
       status: "success",
-      results: allProduct.length,
+      results: allOrder.length,
       data: {
-        product: allProduct,
+        order: allOrder,
       },
     });
   } catch (error: any) {
@@ -33,14 +27,14 @@ export async function getAllProduct(req: Request, res: Response) {
   }
 }
 
-export async function getProduct(req: Request, res: Response) {
+export async function getOrder(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const product = await Product.findById(id);
+    const order = await Order.findById(id);
     res.status(200).json({
       status: "success",
       data: {
-        product,
+        order,
       },
     });
   } catch (error: any) {
@@ -56,42 +50,14 @@ export async function getProduct(req: Request, res: Response) {
   }
 }
 
-export async function importProduct(req: Request, res: Response) {
+export async function createOrder(req: Request, res: Response) {
   try {
-    const filePath = path.join(__dirname, "../../DATA_TEST_PRODUCT.json");
-    const dataList = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    await Product.deleteMany();
-    await Product.create(dataList);
-
-    res.status(200).json({
-      status: "success",
-      requestedAt: Date.now(),
-      results: dataList.length,
-      data: {
-        product: dataList,
-      },
-    });
-  } catch (error: any) {
-    const { message, ...err } = error;
-    res.status(400).json({
-      status: "fail",
-      message: "Invalid data send",
-      error: {
-        message,
-        err,
-      },
-    });
-  }
-}
-
-export async function createProduct(req: Request, res: Response) {
-  try {
-    const newProduct = await Product.create(req.body);
+    const newOrder = await Order.create(req.body);
 
     res.status(201).json({
       status: "success",
       data: {
-        product: newProduct,
+        order: newOrder,
       },
     });
   } catch (error: any) {
@@ -107,19 +73,20 @@ export async function createProduct(req: Request, res: Response) {
   }
 }
 
-export async function updateProduct(req: Request, res: Response) {
+export async function updateOrder(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const updateProduct = await Product.findByIdAndUpdate(id, req.body, {
+    const updateOrder = await Order.findByIdAndUpdate(id, req.body, {
       new: true,
       runValidators: true,
     });
-    if (!updateProduct) throw new Error("Data not found");
+
+    if (!updateOrder) throw new Error("Data not found");
 
     res.status(201).json({
       status: "success",
       data: {
-        product: updateProduct,
+        order: updateOrder,
       },
     });
   } catch (error: any) {
@@ -135,11 +102,11 @@ export async function updateProduct(req: Request, res: Response) {
   }
 }
 
-export async function deleteProduct(req: Request, res: Response) {
+export async function deleteOrder(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const product = await Product.findByIdAndDelete(id);
-    if (!product) throw new Error("Data not found");
+    const order = await Order.findByIdAndDelete(id);
+    if (!order) throw new Error("Data not found");
 
     res.status(204).json({
       status: "success",
